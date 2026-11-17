@@ -1,0 +1,117 @@
+/*
+ * Figma: card 943 × 922, radius 32, shadow 0 2 20 rgba(19,67,112,.15).
+ * Vertical rhythm: 30 · title 35 · 53 · dropzone 420 · 98 · buttons 67 · 101 · steps 32 · 86.
+ */
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: calc(30 * var(--u)) calc(129 * var(--u)) calc(86 * var(--u));
+  border-radius: calc(32 * var(--u));
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  font-size: calc(36 * var(--u));
+  font-weight: 500;
+  line-height: calc(35 * var(--u));
+  letter-spacing: 0.08em;
+  color: var(--color-heading);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(53 * var(--u));
+}
+
+.dropzone {
+  min-height: calc(420 * var(--u));
+}
+
+.actions {
+  --button-width: calc(272 * var(--u));
+  --button-height: calc(67 * var(--u));
+  --button-font-size: calc(24 * var(--u));
+  --button-line-height: calc(35 * var(--u));
+  display: flex;
+  justify-content: center;
+  gap: calc(29 * var(--u));
+  margin-top: calc(98 * var(--u));
+}
+
+.stepper {
+  align-self: center;
+  margin-top: calc(101 * var(--u));
+}
+
+@media (max-width: 1279.98px) {
+  .card {
+    padding: 40px clamp(20px, 6vw, 56px) 44px;
+    border-radius: 24px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .form {
+    margin-top: 28px;
+  }
+
+  .dropzone {
+    min-height: 300px;
+  }
+
+  .actions {
+    --button-width: 240px;
+    --button-height: 60px;
+    --button-font-size: 20px;
+    --button-line-height: 28px;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .stepper {
+    margin-top: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 28px 16px 32px;
+    border-radius: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .form {
+    margin-top: 20px;
+  }
+
+  .dropzone {
+    min-height: 220px;
+  }
+
+  .actions {
+    --button-width: auto;
+    --button-height: 52px;
+    --button-font-size: 17px;
+    --button-line-height: 24px;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .actions > * {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .stepper {
+    margin-top: 32px;
+  }
+}

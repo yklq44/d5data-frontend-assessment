@@ -1,0 +1,288 @@
+/*
+ * Figma: 685 × 420, fill #F2FAFF, 1px inside stroke #0538BB dashed 10/10, radius 15.
+ * Icon 58 × 39 sits 160 from the top; the hint (16/32, max 499 wide) 14 below it.
+ */
+.root {
+  --stroke: var(--color-dropzone-border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  background-color: var(--color-dropzone);
+  transition: background-color 200ms ease;
+}
+
+/* A 2px stroke centred on the edge, clipped to the rounded box, renders as a 1px inside stroke. */
+.border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: inset(0 round 15px);
+  pointer-events: none;
+}
+
+.border rect {
+  fill: none;
+  stroke: var(--stroke);
+  stroke-width: 2;
+  stroke-dasharray: 10 10;
+  transition: stroke 200ms ease;
+}
+
+.trigger {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(160 * var(--u)) calc(40 * var(--u)) 0;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.icon {
+  flex: none;
+  width: calc(58 * var(--u));
+  height: calc(39 * var(--u));
+  color: var(--color-upload-icon);
+  transition: transform 200ms ease;
+}
+
+.hint {
+  max-width: calc(499 * var(--u));
+  margin-top: calc(14 * var(--u));
+  font-size: max(12px, calc(16 * var(--u)));
+  line-height: calc(32 * var(--u));
+  color: var(--color-muted);
+}
+
+@media (hover: hover) {
+  .root:not([data-disabled]):hover {
+    --stroke: var(--color-primary);
+    background-color: var(--color-dropzone-hover);
+  }
+
+  .root:not([data-disabled]):hover .icon {
+    transform: translateY(-3px);
+  }
+}
+
+.root:not([data-disabled]):has(.trigger:active),
+.root[data-dragging] {
+  --stroke: var(--color-primary);
+  background-color: var(--color-dropzone-active);
+}
+
+.root[data-dragging] .border rect {
+  animation: march 0.6s linear infinite;
+}
+
+.root[data-dragging] .icon {
+  transform: translateY(-6px) scale(1.06);
+}
+
+.root[data-invalid]:not([data-dragging]) {
+  --stroke: var(--color-danger);
+}
+
+.root:has(.input:focus-visible) {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.root[data-disabled] .trigger {
+  cursor: progress;
+}
+
+@keyframes march {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px 28px;
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 480px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--color-danger);
+  text-align: left;
+}
+
+.errorIcon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.file {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  width: min(100%, 440px);
+  padding: 10px 10px 10px 14px;
+  border: 1px solid #d6e4ff;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(19 67 112 / 0.08);
+  text-align: left;
+}
+
+.fileIcon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-primary);
+}
+
+.fileText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.fileName {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-heading);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileMeta {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.fileState {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.file[data-status='success'] .fileState {
+  color: var(--color-success);
+}
+
+.fileStateIcon {
+  width: 9px;
+  height: auto;
+}
+
+.remove {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-subtle);
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+@media (hover: hover) {
+  .remove:hover {
+    background-color: #eef3ff;
+    color: var(--color-primary);
+  }
+}
+
+.remove:active {
+  background-color: #dfe8ff;
+  color: var(--color-primary-active);
+}
+
+.remove:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.removeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.progress {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 3px;
+  margin-top: 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background-color: #e3ebff;
+  color: var(--color-primary);
+  appearance: none;
+}
+
+.progress::-webkit-progress-bar {
+  background-color: #e3ebff;
+}
+
+.progress::-webkit-progress-value {
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  transition: width 120ms linear;
+}
+
+.progress::-moz-progress-bar {
+  border-radius: 999px;
+  background-color: var(--color-primary);
+}
+
+@media (max-width: 1279.98px) {
+  .trigger {
+    justify-content: center;
+    padding: 40px 24px 32px;
+  }
+
+  .hint {
+    max-width: 440px;
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .footer {
+    padding: 0 24px 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trigger {
+    padding: 32px 16px 24px;
+  }
+
+  .hint {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .footer {
+    padding: 0 12px 20px;
+  }
+}

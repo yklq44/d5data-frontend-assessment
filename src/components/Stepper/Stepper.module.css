@@ -1,0 +1,98 @@
+/*
+ * Figma: track 343 × 4, dots 32 (ring) / 26 (fill) centred on it,
+ * first dot 28 from the left, last dot 27 from the right.
+ */
+.stepper {
+  --dot-size: calc(32 * var(--u));
+  --track-height: max(3px, calc(4 * var(--u)));
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, calc(343 * var(--u)));
+  padding: 0 calc(27 * var(--u)) 0 calc(28 * var(--u));
+}
+
+.stepper::before,
+.stepper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: var(--track-height);
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.stepper::before {
+  right: 0;
+  background-color: var(--color-track);
+}
+
+/* Active track ends at the centre of the current dot. */
+.stepper::after {
+  width: calc(43 * var(--u) + (100% - 87 * var(--u)) * var(--progress));
+  background-color: var(--color-step-fill);
+  transition: width 400ms ease;
+}
+
+.stepper[data-complete]::after {
+  width: 100%;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+}
+
+.dot {
+  display: grid;
+  place-items: center;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  background-color: var(--color-step);
+  box-shadow: var(--shadow-step);
+  transition: background-color 200ms ease;
+}
+
+.dot::before {
+  content: '';
+  grid-area: 1 / 1;
+  width: calc(26 * var(--u));
+  height: calc(26 * var(--u));
+  border-radius: 50%;
+  background-color: var(--color-step-fill);
+}
+
+.check,
+.number {
+  grid-area: 1 / 1;
+  position: relative;
+}
+
+.check {
+  width: calc(10 * var(--u));
+  height: auto;
+  color: var(--color-step);
+}
+
+.number {
+  font-size: max(9px, calc(11 * var(--u)));
+  font-weight: 500;
+  line-height: calc(13 * var(--u));
+  color: #fff;
+}
+
+.step[data-state='upcoming'] .dot {
+  background-color: var(--color-track);
+  box-shadow: none;
+}
+
+.step[data-state='upcoming'] .dot::before {
+  background-color: #fff;
+}
+
+.step[data-state='upcoming'] .number {
+  color: var(--color-subtle);
+}

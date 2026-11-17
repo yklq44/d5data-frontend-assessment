@@ -1,0 +1,54 @@
+:root {
+  /*
+   * Design unit: 1px of the 1920 × 1080 Figma frame.
+   * It scales fluidly between 1440px (0.75) and 1920px (1) wide viewports,
+   * so the desktop layout keeps the mockup proportions on common laptop screens.
+   */
+  --u: clamp(0.75px, calc(100vw / 1920), 1px);
+
+  --color-page: #f8fbf9;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-heading: #060326;
+  --color-muted: #a5a5a5;
+  --color-subtle: #8a8fa3;
+
+  --color-primary: #1b5aff;
+  --color-primary-hover: #3d74ff;
+  --color-primary-active: #1249e0;
+  --color-secondary: #75acff;
+  --color-secondary-hover: #8bbaff;
+  --color-secondary-active: #5e9cf7;
+
+  --color-step: #2a4cfe;
+  --color-step-fill: #85a7ff;
+  --color-track: #dde0e7;
+
+  --color-dropzone: #f2faff;
+  --color-dropzone-hover: #eaf4ff;
+  --color-dropzone-active: #e1eeff;
+  --color-dropzone-border: #0538bb;
+  --color-upload-icon: #1849d6;
+
+  --color-danger: #d93036;
+  --color-success: #12a150;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei',
+    sans-serif;
+
+  --shadow-card: 0 2px 20px rgb(19 67 112 / 0.15);
+  --shadow-step: 0 7px 64px rgb(0 0 0 / 0.07);
+  --focus-ring: rgb(27 90 255 / 0.45);
+}
+
+@media (max-width: 1279.98px) {
+  :root {
+    --u: 0.8px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --u: 0.75px;
+  }
+}
